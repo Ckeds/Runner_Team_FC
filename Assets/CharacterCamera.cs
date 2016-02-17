@@ -10,6 +10,7 @@ public class CharacterCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.position = player.GetComponent<Transform> ().position;
+		this.transform.position = player.GetComponent<Transform>().position;
+        this.transform.rotation = player.GetComponent<Transform>().rotation;
 	}
 }
