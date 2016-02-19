@@ -10,11 +10,16 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Quaternion dRotation = Quaternion.Euler(new Vector3(0, Input.GetAxis("Horizontal") / 2, 0));
-        rb.MoveRotation(rb.rotation * dRotation);
-        //Debug.Log(this.transform.rotation);
-		rb.velocity = transform.forward * 3;
-        //Debug.Log(rb.rotation);
+        Quaternion dRotation = Quaternion.Euler( new Vector3( 0, Input.GetAxis( "Mouse X" ) * 3, 0 ) );
+        rb.MoveRotation( rb.rotation * dRotation );
+
+        if( Input.GetKey( "mouse 0" ) ) {
+            rb.velocity = transform.forward * 8;
+        } else {
+            rb.velocity = transform.forward * 0;
+        }
+
+        Debug.Log( rb.position.x );
 	}
     void OnTriggerEnter (Collider O)
     {
