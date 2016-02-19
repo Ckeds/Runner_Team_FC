@@ -20,7 +20,7 @@ public class RandomGeneration : MonoBehaviour {
 		this.y = y;
 		float tempZ;
 		float tempX;
-		for (var i = 0; i < (int)(difficulty * 20); i++){
+		for (var i = 0; i < (int)(difficulty * 5); i++){
 			GameObject g = null;
 			do{
 				tempZ = Random.Range(-size / 2,size / 2);
@@ -57,7 +57,7 @@ public class RandomGeneration : MonoBehaviour {
 		distance += (player.transform.position.z - this.y) * (player.transform.position.z - this.y);
 		distance = Mathf.Sqrt(distance);
 		Debug.Log(distance);
-		if(5 * distance / 4 > this.size)
+		if(2 * distance / 4 > this.size)
 		{
 			foreach (GameObject g in obstacles){
 				Destroy(g);
