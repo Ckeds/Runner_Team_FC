@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour {
             rb.velocity = transform.forward * 0;
         }
 
-        Debug.Log( rb.position.x );
+        //Debug.Log( rb.position.x );
 	}
     void OnTriggerEnter (Collider O)
     {
