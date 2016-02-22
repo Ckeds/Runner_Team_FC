@@ -8,7 +8,8 @@ public class RandomGeneration : MonoBehaviour {
 	public GameObject player;
 	float x;
 	float y;
-	List<GameObject> obstacles;
+    ResourceManager rm;
+    List<GameObject> obstacles;
 	// Use this for initialization
 	void Start () {}
 
@@ -16,6 +17,7 @@ public class RandomGeneration : MonoBehaviour {
 		obstacles = new List<GameObject>();
 		this.x = x;
 		this.y = y;
+        this.rm = rm;
 		float tempZ;
 		float tempX;
 		for (var i = 0; i < (int)(difficulty * 5); i++){
@@ -61,10 +63,9 @@ public class RandomGeneration : MonoBehaviour {
 		//Debug.Log(distance);
 		if(2 * distance / 4 > this.size)
 		{
-			foreach (GameObject g in obstacles){
-				g.SetActive(false);
-			}
-			transform.root.gameObject.SetActive(false);;
+            rm.SortDeactivated(obstacles);
+
+            transform.root.gameObject.SetActive(false);
 		}
 	}
 }

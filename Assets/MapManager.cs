@@ -11,7 +11,7 @@ public class MapManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rm = GetComponent<ResourceManager>();
-		rm.Setup(9,50,50);
+		rm.Setup(9,250,250);
 		mapPos = new List<Vector2>();
 		GameObject g = rm.GetMap();
 		g.GetComponent<RandomGeneration>().difficulty = Random.Range(5,15);

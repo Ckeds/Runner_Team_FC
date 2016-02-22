@@ -43,42 +43,62 @@ public class ResourceManager : MonoBehaviour
     }
     public GameObject GetMap()
     {
-        for (int i = 0; i < maps.Count; i++)
+        if (!maps[0].activeInHierarchy)
         {
-            if (!maps[i].activeInHierarchy)
-            {
-                return maps[i];
-            }
+            GameObject g = maps[0];
+            maps.RemoveAt(0);
+            maps.Add(g);
+            return g;
         }
+
         GameObject obj = (GameObject)Instantiate(map);
         maps.Add(obj);
         return obj;
     }
     public GameObject GetRock()
     {
-        for (int i = 0; i < rocks.Count; i++)
+        if (!rocks[0].activeInHierarchy)
         {
-            if (!rocks[i].activeInHierarchy)
-            {
-                return rocks[i];
-            }
+            GameObject g = rocks[0];
+            rocks.RemoveAt(0);
+            rocks.Add(g);
+            return g;
         }
+
         GameObject obj = (GameObject)Instantiate(rock);
         rocks.Add(obj);
         return obj;
     }
     public GameObject GetTree()
     {
-        for (int i = 0; i < trees.Count; i++)
+        if (!trees[0].activeInHierarchy)
         {
-            if (!trees[i].activeInHierarchy)
-            {
-                return trees[i];
-            }
+            GameObject g = trees[0];
+            trees.RemoveAt(0);
+            trees.Add(g);
+            return g;
         }
         GameObject obj = (GameObject)Instantiate(tree);
         trees.Add(obj);
         return obj;
+    }
+    public void SortDeactivated(List<GameObject> deactivated)
+    {
+        foreach(GameObject g in deactivated)
+        {
+            if (rocks.Contains(g))
+            {
+                rocks.Remove(g);
+                g.SetActive(false);
+                rocks.Insert(0, g);
+            }
+            else if (trees.Contains(g))
+            {
+                trees.Remove(g);
+                g.SetActive(false);
+                trees.Insert(0, g);
+            }
+        }
     }
 }
     
