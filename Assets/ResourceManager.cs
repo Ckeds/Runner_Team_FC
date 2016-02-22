@@ -80,5 +80,9 @@ public class ResourceManager : MonoBehaviour
         trees.Add(obj);
         return obj;
     }
+	void Update()
+	{
+		Debug.Log(rocks.Count + trees.Count);
+	}
 }
     

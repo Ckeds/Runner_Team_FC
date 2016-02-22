@@ -14,7 +14,7 @@ public class RandomGeneration : MonoBehaviour {
 	// Use this for initialization
 	void Start () {}
 
-	public void Create (float x, float y) {
+	public void Create (float x, float y, ResourceManager rm) {
 		obstacles = new List<GameObject>();
 		this.x = x;
 		this.y = y;
@@ -33,19 +33,23 @@ public class RandomGeneration : MonoBehaviour {
 			switch(obstaclePick){
 			case 0:
 				position = new Vector3(tempX + x, 0 ,tempZ + y);
-				g = (GameObject)Instantiate(RockPrefab, position, Quaternion.identity);
-				Debug.Log(g);
+				g = rm.GetRock();
+				g.transform.position = position;
+				g.SetActive(true);
 				obstacles.Add(g);
 				break;
 			case 1:
 				position = new Vector3(tempX + x, 0 ,tempZ + y);
-				g = (GameObject)Instantiate(TreePrefab, position, Quaternion.identity);
-				Debug.Log(g);
+				g = rm.GetTree();
+				g.transform.position = position;
+				g.SetActive(true);
 				obstacles.Add(g);
 				break;
 			default:
 				position = new Vector3(tempX + x, 0 ,tempZ + y);
-				g = (GameObject)Instantiate(RockPrefab, position, Quaternion.identity);
+				g = rm.GetRock();
+				g.transform.position = position;
+				g.SetActive(true);
 				obstacles.Add(g);
 				break;
 			}
@@ -56,13 +60,13 @@ public class RandomGeneration : MonoBehaviour {
 		float distance = (player.transform.position.x - this.x) * (player.transform.position.x - this.x);
 		distance += (player.transform.position.z - this.y) * (player.transform.position.z - this.y);
 		distance = Mathf.Sqrt(distance);
-		Debug.Log(distance);
+		//Debug.Log(distance);
 		if(2 * distance / 4 > this.size)
 		{
 			foreach (GameObject g in obstacles){
-				Destroy(g);
+				g.SetActive(false);
 			}
-			Destroy(transform.root.gameObject);
+			transform.root.gameObject.SetActive(false);;
 		}
 	}
 }

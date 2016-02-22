@@ -4,17 +4,20 @@ using System.Collections.Generic;
 
 
 public class MapManager : MonoBehaviour {
-	public GameObject map;
 	public GameObject player;
+	ResourceManager rm;
 	float size = 25;
 	List<Vector2> mapPos;
 	// Use this for initialization
 	void Start () {
+		rm = GetComponent<ResourceManager>();
+		rm.Setup(9,50,50);
 		mapPos = new List<Vector2>();
-		GameObject g = (GameObject)Instantiate(map, new Vector3(0,0,0), Quaternion.identity);
+		GameObject g = rm.GetMap();
 		g.GetComponent<RandomGeneration>().difficulty = Random.Range(5,15);
 		g.GetComponent<RandomGeneration>().player = this.player;
-		g.GetComponent<RandomGeneration>().Create(0, 0);
+		g.GetComponent<RandomGeneration>().Create(0, 0, rm);
+		g.SetActive(true);
 		mapPos.Add(new Vector2(0,0));
 	}
 
@@ -49,11 +52,10 @@ public class MapManager : MonoBehaviour {
 				d = Mathf.Sqrt(d);
 				//are we in range
 				if(2 * d / 4 < this.size){
-					//Debug.Log("here");
+
 					//does this spot already exist
 					foreach (Vector2 v in mapPos){
-						//Debug.Log(v);
-						//Debug.Log(vec);
+
 						if(vec == v){
 							exists = true;
 							break;
@@ -61,11 +63,12 @@ public class MapManager : MonoBehaviour {
 					}
 					//if not, create
 					if (exists == false){
-						GameObject g = (GameObject)Instantiate(map, new Vector3(0,0,0), Quaternion.identity);
+						GameObject g = rm.GetMap();
 						g.GetComponent<RandomGeneration>().difficulty = Random.Range(5,15);
                         g.GetComponent<RandomGeneration>().size = this.size;
                         g.GetComponent<RandomGeneration>().player = this.player;
-						g.GetComponent<RandomGeneration>().Create(vec.x, vec.y);
+						g.GetComponent<RandomGeneration>().Create(vec.x, vec.y, rm);
+						g.SetActive(true);
 						mapPos.Add(vec);
 					}
 				}
