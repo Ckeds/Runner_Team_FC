@@ -26,20 +26,20 @@ public class MapManager : MonoBehaviour {
 		//finds current block you are standing on
 		float closest = 10000;
 		Vector2 close = new Vector2(0,0);
-		Debug.Log(mapPos.Count);
+		//Debug.Log(mapPos.Count);
 		for(int v = mapPos.Count - 1; v >= 0; v--)
 		{
 			float distance = (player.transform.position.x - mapPos[v].x) * (player.transform.position.x - mapPos[v].x);
 			distance += (player.transform.position.z - mapPos[v].y) * (player.transform.position.z - mapPos[v].y);
 			distance = Mathf.Sqrt(distance);
-			if(2 * distance / 4 > this.size)
-			{
-				mapPos.RemoveAt(v);
-			}
 			if(distance < closest)
 			{
 				close = mapPos[v];
 				closest = distance;
+			}
+			if(2 * distance / 4 > this.size)
+			{
+				mapPos.RemoveAt(v);
 			}
 		}
 		//searches to see if a new map is needed

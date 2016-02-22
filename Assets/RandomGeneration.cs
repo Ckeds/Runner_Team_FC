@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class RandomGeneration : MonoBehaviour {
-	public GameObject RockPrefab;
-	public GameObject TreePrefab;
 	public float difficulty;
 	public float size;
 	public GameObject player;
