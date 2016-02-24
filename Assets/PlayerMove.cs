@@ -3,9 +3,13 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
     Rigidbody rb;
+	float speed;
+	float speedRegular = 8;
+	float speedSlowed = 2;
 	// Use this for initialization
 	void Start () {
         rb = this.GetComponent<Rigidbody>();
+		speed = speedRegular;
 	}
 	
 	// Update is called once per frame
@@ -14,7 +18,7 @@ public class PlayerMove : MonoBehaviour {
         rb.MoveRotation( rb.rotation * dRotation );
 
         if( Input.GetKey( "mouse 0" ) ) {
-            rb.velocity = transform.forward * 8;
+            rb.velocity = transform.forward * speed;
         } else {
             rb.velocity = transform.forward * 0;
         }
@@ -23,6 +27,15 @@ public class PlayerMove : MonoBehaviour {
 	}
     void OnTriggerEnter (Collider O)
     {
-        Debug.Log("You have hit an object.");
+        Debug.Log(O);
+		speed = speedSlowed;
     }
+	void OnTriggerExit (Collider O)
+	{
+		speed = speedRegular;
+	}
+	void OnCollisionEnter(Collision O)
+	{
+
+	}
 }

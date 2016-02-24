@@ -5,18 +5,20 @@ using System.Collections.Generic;
 
 public class MapManager : MonoBehaviour {
 	public GameObject player;
+	public GameObject fire;
 	ResourceManager rm;
-	float size = 25;
+	float size = 50;
 	List<Vector2> mapPos;
 	// Use this for initialization
 	void Start () {
 		rm = GetComponent<ResourceManager>();
-		rm.Setup(9,250,250);
+		rm.Setup(9,750,750);
 		mapPos = new List<Vector2>();
 		GameObject g = rm.GetMap();
 		g.GetComponent<RandomGeneration>().difficulty = Random.Range(5,15);
 		g.GetComponent<RandomGeneration>().player = this.player;
 		g.GetComponent<RandomGeneration>().Create(0, 0, rm);
+		Instantiate(fire, new Vector3(0,0,0),Quaternion.identity); 
 		g.SetActive(true);
 		mapPos.Add(new Vector2(0,0));
 	}
@@ -64,6 +66,10 @@ public class MapManager : MonoBehaviour {
 					//if not, create
 					if (exists == false){
 						GameObject g = rm.GetMap();
+						if(Random.Range(0,5) >= 0)
+						{
+							Instantiate(fire, new Vector3(Random.Range(vec.x -size /2, vec.x + size /2),0,Random.Range(vec.y -size /2, vec.y + size /2)),Quaternion.identity);
+						}
 						g.GetComponent<RandomGeneration>().difficulty = Random.Range(5,15);
                         g.GetComponent<RandomGeneration>().size = this.size;
                         g.GetComponent<RandomGeneration>().player = this.player;

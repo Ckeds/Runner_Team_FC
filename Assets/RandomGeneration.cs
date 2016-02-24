@@ -20,13 +20,13 @@ public class RandomGeneration : MonoBehaviour {
         this.rm = rm;
 		float tempZ;
 		float tempX;
-		for (var i = 0; i < (int)(difficulty * 5); i++){
+		for (var i = 0; i < (int)(difficulty * size / 2 ); i++){
 			GameObject g = null;
 			do{
-				tempZ = Random.Range(-size / 2,size / 2);
+				tempZ = Random.Range(-size / 1.9f,size / 1.9f);
 			}while(Mathf.Abs(player.transform.position.z - tempZ) < 2);
 			do{
-				tempX = Random.Range(-size / 2,size / 2);
+				tempX = Random.Range(-size / 1.9f,size / 1.9f);
 			}while(Mathf.Abs(player.transform.position.x - tempX) < 2);
 			int obstaclePick = (int) Mathf.Floor(Random.Range(0,2));
 			Vector3 position;
