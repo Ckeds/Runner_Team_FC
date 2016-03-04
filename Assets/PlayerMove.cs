@@ -6,6 +6,11 @@ public class PlayerMove : MonoBehaviour {
 	float speed;
 	float speedRegular = 8;
 	float speedSlowed = 2;
+	float maxX;
+	float maxY;
+	float minX;
+	float minY;
+	public bool gameOver = false;
 	// Use this for initialization
 	void Start () {
         rb = this.GetComponent<Rigidbody>();
@@ -28,6 +33,10 @@ public class PlayerMove : MonoBehaviour {
     void OnTriggerEnter (Collider O)
     {
         Debug.Log(O);
+		if (O.name == "Fire Sub(Clone)") {
+			Debug.Log ("GAME OVER");
+			gameOver = true;
+		}
 		speed = speedSlowed;
     }
 	void OnTriggerExit (Collider O)

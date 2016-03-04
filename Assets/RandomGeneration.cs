@@ -57,15 +57,20 @@ public class RandomGeneration : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		float distance = (player.transform.position.x - this.x) * (player.transform.position.x - this.x);
-		distance += (player.transform.position.z - this.y) * (player.transform.position.z - this.y);
-		distance = Mathf.Sqrt(distance);
-		//Debug.Log(distance);
-		if(2 * distance / 4 > this.size)
-		{
-            rm.SortDeactivated(obstacles);
+		if (player.GetComponent<PlayerMove> ().gameOver == true) {
+			rm.SortDeactivated (obstacles);
+			transform.root.gameObject.SetActive (false);
+		} 
+		else {
+			float distance = (player.transform.position.x - this.x) * (player.transform.position.x - this.x);
+			distance += (player.transform.position.z - this.y) * (player.transform.position.z - this.y);
+			distance = Mathf.Sqrt (distance);
+			//Debug.Log(distance);
+			if (2 * distance / 4 > this.size) {
+				rm.SortDeactivated (obstacles);
 
-            transform.root.gameObject.SetActive(false);
+				transform.root.gameObject.SetActive (false);
+			}
 		}
 	}
 }
