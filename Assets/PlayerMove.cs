@@ -15,10 +15,13 @@ public class PlayerMove : MonoBehaviour {
 	void Start () {
         rb = this.GetComponent<Rigidbody>();
 		speed = speedRegular;
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log(Cursor.lockState);
         Quaternion dRotation = Quaternion.Euler( new Vector3( 0, Input.GetAxis( "Mouse X" ) * 3, 0 ) );
         rb.MoveRotation( rb.rotation * dRotation );
 
@@ -36,6 +39,8 @@ public class PlayerMove : MonoBehaviour {
 		if (O.name == "Fire Sub(Clone)") {
 			Debug.Log ("GAME OVER");
 			gameOver = true;
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
 		}
 		speed = speedSlowed;
     }

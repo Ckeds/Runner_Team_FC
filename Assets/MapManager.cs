@@ -22,6 +22,7 @@ public class MapManager : MonoBehaviour {
 		rm.Setup(9,750,750);
 		mapPos = new List<Vector2>();
 		GameObject g = rm.GetMap();
+		g.transform.position = new Vector3 (0, -0.5f, 0);
 		g.GetComponent<RandomGeneration>().difficulty = Random.Range(5,15);
 		g.GetComponent<RandomGeneration>().player = this.player;
 		g.GetComponent<RandomGeneration>().Create(0, 0, rm);
